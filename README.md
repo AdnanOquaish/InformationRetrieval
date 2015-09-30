@@ -1,5 +1,10 @@
 # Vector Space model based ranked textual information retrival system
 
+Authors:
+Abhimanyu Siwach
+Adnan Oquaish
+Deevankshu Garg
+
 Requirements:
 	g++ version 4.9.1
 
