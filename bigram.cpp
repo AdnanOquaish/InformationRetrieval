@@ -82,7 +82,7 @@ void bigram::printCorrectWord(string& word){
 		}
 	}		
 	//cout << jaccard << endl;
-	if(jaccard > 0.75){
+	if(jaccard > 0.45){
 		word = correctWord;
 	}	
 }
