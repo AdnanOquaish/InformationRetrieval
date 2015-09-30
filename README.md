@@ -3,11 +3,9 @@
 
 Authors:
 
-Abhimanyu Siwach
-
-Adnan Oquaish
-
-Deevankshu Garg
+	Abhimanyu Siwach
+	Adnan Oquaish
+	Deevankshu Garg
 
 
 Requirements:
@@ -49,7 +47,7 @@ Precision and Recall:
 			Documents relevant in the retrieved dataset: 264 
 			Precision: 79.5%
 			Recall: 91.67%
-			
+
 	-> ipad hang
 			Documents retrieved: 73
 			Documents relevant in the dataset: 87
