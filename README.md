@@ -34,6 +34,13 @@ If no argument is provided the default search is on the file "posts.csv" already
 Assumption of the input document:
 
 	Each row of the CSV file is considered to be a different document.
+	
+Features:
+
+	Normal Queries
+	Spelling Correction
+	Phrase Queries
+	Wild Card Queries
 
 
 Precision and Recall:
