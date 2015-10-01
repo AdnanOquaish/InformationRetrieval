@@ -47,9 +47,9 @@ char bigramNode::getAlphabet(){
 }
 
 void bigramNode::insertWord(string word){
-	this->bigramList.push_front(word);
+	this->bigramList.insert(word);
 }
 
-const list<string> & bigramNode::getWordList(){
+const set<string> & bigramNode::getWordList(){
     return this->bigramList;
 }
