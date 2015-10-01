@@ -51,8 +51,8 @@ void bigram::checkWord(string& word){
 		else{
 			node = node->findChild(tempWord[i+1]);
 		}
-		list<string> words = node->getWordList();
-		list<string>::iterator itr;
+		set<string> words = node->getWordList();
+		set<string>::iterator itr;
 		for(itr = words.begin(); itr != words.end(); itr++){
 			if(correct.find(*itr) == correct.end()){
 				correct[*itr] = 1.0;
