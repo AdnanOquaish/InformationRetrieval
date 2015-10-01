@@ -13,6 +13,8 @@ private:
 
 public:
 	Query(Trie* trie);
+	
+	~Query(Trie* trie);
 
 	double getMagnitude();
 
