@@ -11,6 +11,11 @@ Query::Query(Trie* trie){
 	this -> magnitude = 0;
 }
 
+Query::~Query(){
+	processedQueries.clear();
+	answer.clear();
+}
+
 
 double Query::getMagnitude(){
 	return this->magnitude;
@@ -34,8 +39,13 @@ void Query::inputQuery(){
 	        	word = query.substr(prev, pos-prev);
 	        	Porter2Stemmer::stem(word);
 	        	cout << word << " ";
-	        	bg->checkWord(word);
-	        	insertProcessedQueries(word);
+	        	if(word[0] == '*' || word[word.length()-1] == '*'){
+	        		bg->wildCardQuery(this, word);
+	        	}
+	        	else{
+	        		bg->checkWord(word);
+	        		insertProcessedQueries(word);
+	        	}
 	        }
 	        prev = pos+1;
 	    }
@@ -43,8 +53,13 @@ void Query::inputQuery(){
 	    	word = query.substr(prev, std::string::npos);
 	    	Porter2Stemmer::stem(word);
 	    	cout << word << " ";
-	        bg->checkWord(word);
-	        insertProcessedQueries(word);
+	        if(word[0] == '*' || word[word.length()-1] == '*'){
+	        	bg->wildCardQuery(this, word);
+        	}
+        	else{
+        		bg->checkWord(word);
+        		insertProcessedQueries(word);
+        	}
 	    }
 	    cout << "\ncorrected query: ";
 	    map< string, QueryWeights* >::iterator itr;
@@ -71,8 +86,13 @@ void Query::inputQuery(){
 	        	word = query.substr(prev, pos-prev);
 	        	Porter2Stemmer::stem(word);
 	        	cout << word << " ";
-	        	bg->checkWord(word);
-	        	insertProcessedQueries(word);
+	        	if(word[0] == '*' || word[word.length()-1] == '*'){
+		        	bg->wildCardQuery(this, word);
+	        	}
+	        	else{
+	        		bg->checkWord(word);
+	        		insertProcessedQueries(word);
+	        	}
 	        }
 	        prev = pos+1;
 	    }
@@ -80,8 +100,13 @@ void Query::inputQuery(){
 	    	word = query.substr(prev, std::string::npos);
 	    	Porter2Stemmer::stem(word);
 	    	cout << word << " ";
-	        bg->checkWord(word);
-	        insertProcessedQueries(word);
+	        if(word[0] == '*' || word[word.length()-1] == '*'){
+	        	bg->wildCardQuery(this, word);
+        	}
+        	else{
+        		bg->checkWord(word);
+        		insertProcessedQueries(word);
+        	}
 	    }
 	    cout << "\ncorrected query: ";
 	    map< string, QueryWeights* >::iterator itr;
