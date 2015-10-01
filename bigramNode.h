@@ -1,4 +1,4 @@
-#include <list>
+#include <set>
 #include <string>
 #include <map>
 
@@ -9,7 +9,7 @@ class bigramNode{
 private:
 	bool isWord;
 	char alphabet;
-	list<string> bigramList;
+	set<string> bigramList;
 	map<char, bigramNode*> children;
 
 public:
@@ -34,5 +34,5 @@ public:
 
 	void insertWord(string word);
 
-	const list<string> & getWordList();
+	const set<string> & getWordList();
 };
