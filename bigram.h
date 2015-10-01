@@ -20,6 +20,8 @@ public:
 	void checkWord(string& word);
 
 	void printCorrectWord(string& word);
+	
+	void wildCardQuery(query* q, string word);
 };
 
 extern bigram* bg;
