@@ -34,7 +34,7 @@ void Query::inputQuery(){
 		cout << "\nprocessed query: ";
 		std::size_t prev = 0, pos;
 		string word;
-	    while((pos = query.find_first_of(" ';,.-_^()[]\t\r\n\v\f", prev)) != std::string::npos){
+	    while((pos = query.find_first_of(" '&:#!+;?/,.-_<=>^()[]\t\r\n\v\f", prev)) != std::string::npos){
 	        if (pos > prev){
 	        	word = query.substr(prev, pos-prev);
 	        	Porter2Stemmer::stem(word);
@@ -42,7 +42,7 @@ void Query::inputQuery(){
 	        	if(word[0] == '*' || word[word.length()-1] == '*'){
 	        		bg->wildCardQuery(this, word);
 	        	}
-	        	else{
+	        	else{ 
 	        		bg->checkWord(word);
 	        		insertProcessedQueries(word);
 	        	}
@@ -72,7 +72,7 @@ void Query::inputQuery(){
 		printCosineSimilarity();
 	}
 	else if(typeQuery[0] == 'P' || typeQuery[0] == 'p'){
-		cout << "\nInput your normal query: ";
+		cout << "\nInput your phrase query: ";
 		string query;
 		cin.ignore (std::numeric_limits<std::streamsize>::max(), '\n');
 		getline(cin, query);
@@ -81,18 +81,13 @@ void Query::inputQuery(){
 
 		std::size_t prev = 0, pos;
 		string word;
-	    while((pos = query.find_first_of(" ';,.-_^()[]\t\r\n\v\f", prev)) != std::string::npos){
+	    while((pos = query.find_first_of(" '&:#!+;?/,.-_<=>^()[]\t\r\n\v\f", prev)) != std::string::npos){
 	        if (pos > prev){
 	        	word = query.substr(prev, pos-prev);
 	        	Porter2Stemmer::stem(word);
 	        	cout << word << " ";
-	        	if(word[0] == '*' || word[word.length()-1] == '*'){
-		        	bg->wildCardQuery(this, word);
-	        	}
-	        	else{
-	        		bg->checkWord(word);
-	        		insertProcessedQueries(word);
-	        	}
+	        	bg->checkWord(word);
+	        	insertProcessedQueries(word);
 	        }
 	        prev = pos+1;
 	    }
@@ -297,6 +292,7 @@ int main(int argc, char** argv){
 	index(filename);
 	cout << "Indexing finished" << endl;
 	cout << "Total documents in corpus: " << totalDocs << endl;
+	cout << "Total words in corpus: " << dict->getWordCount() << endl;
 	dict->computeWeights();
 	Query* q = new Query(dict);
 	q->inputQuery();
