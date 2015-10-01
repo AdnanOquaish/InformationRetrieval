@@ -27,7 +27,7 @@ trie.o: bigram.h porter2_stemmer.h trie.h trie.cpp
 bigramNode.o: bigramNode.h bigramNode.cpp
 	$(CC) -c bigramNode.cpp -o $@
 
-bigram.o: bigram.h bigram.cpp
+bigram.o: query.h bigram.h bigram.cpp
 	$(CC) -c bigram.cpp -o $@
 
 queryWeight.o: queryWeight.h queryWeight.cpp
