@@ -1,4 +1,5 @@
 #include "bigram.h"
+#include "query.h"
 
 bigram::bigram(){
 	this->root = new bigramNode();
@@ -85,4 +86,51 @@ void bigram::printCorrectWord(string& word){
 	if(jaccard > 0.45){
 		word = correctWord;
 	}	
+}
+
+void bigram::wildCardQuery(query* q, string word){
+	if(word[0] != '*'){
+		word = '$'+word;
+	}
+	if(word[word.length()-1] != '*'){
+		word = word + '$';
+	}
+	if(word[0] == '*'){
+		word = word.substr(1, word.length()-1);
+	}
+	if(word[word.length()-1] == '*'){
+		word = word.substr(0, word.length()-1);
+	}
+	for(unsigned int i = 0; i < word.length()-1; i++){
+		bigramNode* node = root;
+		if(node->findChild(word[i]) == NULL){
+			continue;
+		}
+		else{
+			node = node->findChild(word[i]);
+		}
+		if(node->findChild(word[i+1]) == NULL){
+			continue;
+		}
+		else{
+			node = node->findChild(word[i+1]);
+		}
+		set<string> words = node->getWordList();
+		set<string>::iterator itr;
+		for(itr = words.begin(); itr != words.end(); itr++){
+			if(correct.find(*itr) == correct.end()){
+				correct[*itr] = 1.0;
+			}
+			else{
+				correct[*itr] += 1.0;
+			}
+		}
+	}
+	map<string, double>:: iterator it;
+	for(it = correct.begin(); it != correct.end(); it++){
+		if(it->second == word.length()-1){
+			q->insertProcessedQueries(word);	
+		}
+	}
+	correct.clear();
 }
